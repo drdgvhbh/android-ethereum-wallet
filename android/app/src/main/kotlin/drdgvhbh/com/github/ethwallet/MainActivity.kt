@@ -1,9 +1,7 @@
 package drdgvhbh.com.github.ethwallet
 
 import android.os.Bundle
-import android.util.Log
 import dagger.android.AndroidInjection
-import dagger.android.support.DaggerAppCompatActivity
 import drdgvhbh.com.github.ethwallet.persistence.WalletService
 
 import io.flutter.app.FlutterActivity
@@ -24,7 +22,12 @@ class MainActivity: FlutterActivity() {
 
     MethodChannel(flutterView, WALLET_CHANNEL).setMethodCallHandler{ call, result ->
       when(call.method) {
-        "createWallet" -> result.success(Unit)
+        "createWallet" -> {
+          val password = call.argument<String>("password")
+                  ?: return@setMethodCallHandler result.error("400", "Password is required", null)
+          val mnemonic = walletService.createWallet(password)
+          result.success(mnemonic)
+        }
         else -> result.notImplemented()
       }
     }
