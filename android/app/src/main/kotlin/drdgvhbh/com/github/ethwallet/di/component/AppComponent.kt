@@ -7,13 +7,19 @@ import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import dagger.android.support.AndroidSupportInjectionModule
 import drdgvhbh.com.github.ethwallet.MainActivity
+import drdgvhbh.com.github.ethwallet.di.module.ActivityModule
 import drdgvhbh.com.github.ethwallet.di.module.ApplicationModule
 import drdgvhbh.com.github.ethwallet.di.module.PersistenceModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AndroidSupportInjectionModule::class, ApplicationModule::class, PersistenceModule::class])
-interface AppComponent: AndroidInjector<DaggerApplication> {
+@Component(modules = [
+    AndroidSupportInjectionModule::class,
+    ApplicationModule::class,
+    PersistenceModule::class,
+    ActivityModule::class
+])
+interface AppComponent : AndroidInjector<DaggerApplication> {
     fun inject(mainActivity: MainActivity)
 
     @Component.Builder

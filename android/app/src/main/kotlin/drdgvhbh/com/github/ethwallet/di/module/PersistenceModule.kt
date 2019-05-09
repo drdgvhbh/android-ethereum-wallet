@@ -3,6 +3,7 @@ package drdgvhbh.com.github.ethwallet.di.module
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import drdgvhbh.com.github.ethwallet.di.context.ApplicationContext
 import drdgvhbh.com.github.ethwallet.persistence.*
 import javax.inject.Singleton
 
@@ -15,9 +16,9 @@ class PersistenceModule {
     @Provides
     @Singleton
     fun provideWalletRepository(
-            context: Context,
+            @ApplicationContext context: Context,
             walletGenerator: WalletGenerator
-    ) = Bip44WalletRepository(context, walletGenerator)
+    ): WalletRepository = Bip44WalletRepository(context, walletGenerator)
 
     @Provides
     @Singleton
