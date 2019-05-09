@@ -2,7 +2,7 @@ package drdgvhbh.com.github.ethwallet
 
 import android.os.Bundle
 import dagger.android.AndroidInjection
-import drdgvhbh.com.github.ethwallet.persistence.WalletService
+import drdgvhbh.com.github.ethwallet.service.WalletService
 
 import io.flutter.app.FlutterActivity
 import io.flutter.plugin.common.MethodChannel

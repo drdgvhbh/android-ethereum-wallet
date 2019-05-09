@@ -4,6 +4,8 @@ import android.content.Context
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import com.nhaarman.mockitokotlin2.*
+import drdgvhbh.com.github.ethwallet.service.WalletRepository
+import drdgvhbh.com.github.ethwallet.service.WalletService
 import org.junit.Test
 import org.web3j.crypto.Bip39Wallet
 import java.io.File

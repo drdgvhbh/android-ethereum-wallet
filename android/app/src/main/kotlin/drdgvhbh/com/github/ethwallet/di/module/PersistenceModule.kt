@@ -5,6 +5,8 @@ import dagger.Module
 import dagger.Provides
 import drdgvhbh.com.github.ethwallet.di.context.ApplicationContext
 import drdgvhbh.com.github.ethwallet.persistence.*
+import drdgvhbh.com.github.ethwallet.service.WalletRepository
+import drdgvhbh.com.github.ethwallet.service.WalletService
 import javax.inject.Singleton
 
 @Module
