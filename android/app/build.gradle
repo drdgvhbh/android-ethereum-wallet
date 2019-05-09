@@ -50,6 +50,7 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -68,7 +69,6 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     testImplementation 'junit:junit:4.12'
-    testImplementation 'androidx.test:core:1.1.0'
     testImplementation 'com.willowtreeapps.assertk:assertk-jvm:0.14'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -78,6 +78,7 @@ dependencies {
     // https://mvnrepository.com/artifact/com.nhaarman.mockitokotlin2/mockito-kotlin
     testImplementation group: 'com.nhaarman.mockitokotlin2', name: 'mockito-kotlin', version: '2.1.0'
 
+    implementation "com.google.dagger:dagger-android-support:2.22.1"
     // https://mvnrepository.com/artifact/com.google.dagger/dagger
     implementation group: 'com.google.dagger', name: 'dagger', version: '2.22.1'
     // https://mvnrepository.com/artifact/com.google.dagger/dagger-compiler
