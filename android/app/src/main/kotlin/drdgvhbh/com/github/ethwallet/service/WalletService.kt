@@ -4,8 +4,8 @@ typealias Mnemonic = String
 
 class WalletService(
         private val walletRepository: WalletRepository
-) {
-    fun createWallet(password: String): Mnemonic {
+): WalletFactory {
+    override fun createWallet(password: String): Mnemonic {
         return walletRepository.create(password).mnemonic
     }
 }
