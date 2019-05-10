@@ -76,6 +76,10 @@ dependencies {
 
     implementation group: 'org.web3j', name: 'core', version: '4.2.0-android'
 
+    // https://mvnrepository.com/artifact/com.android.support/support-annotations
+    implementation group: 'com.android.support', name: 'support-annotations', version: '28.0.0'
+
+
     // https://mvnrepository.com/artifact/com.nhaarman.mockitokotlin2/mockito-kotlin
     testImplementation group: 'com.nhaarman.mockitokotlin2', name: 'mockito-kotlin', version: '2.1.0'
 
