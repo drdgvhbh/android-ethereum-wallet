@@ -2,6 +2,7 @@ package drdgvhbh.com.github.ethwallet
 
 import android.os.Bundle
 import dagger.android.AndroidInjection
+import drdgvhbh.com.github.ethwallet.bridge.CreateWalletHandler
 import drdgvhbh.com.github.ethwallet.service.WalletService
 
 import io.flutter.app.FlutterActivity
@@ -13,7 +14,7 @@ private const val WALLET_CHANNEL = "drdgvhbh.com.ethwallet.wallet"
 
 class MainActivity: FlutterActivity() {
   @Inject
-  lateinit var walletService: WalletService
+  lateinit var createWalletHandler: CreateWalletHandler
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -22,12 +23,7 @@ class MainActivity: FlutterActivity() {
 
     MethodChannel(flutterView, WALLET_CHANNEL).setMethodCallHandler{ call, result ->
       when(call.method) {
-        "createWallet" -> {
-          val password = call.argument<String>("password")
-                  ?: return@setMethodCallHandler result.error("400", "Password is required", null)
-          val mnemonic = walletService.createWallet(password)
-          result.success(mnemonic)
-        }
+        "createWallet" -> createWalletHandler.onMethodCall(call, result)
         else -> result.notImplemented()
       }
     }
