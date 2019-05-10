@@ -418,3 +418,5 @@ DerivedData/
 # End of https://www.gitignore.io/api/linux,xcode,macos,android,windows,flutter,intellij+all,androidstudio
 
 android/app/.attach_pid*
+
+*.g.dart
