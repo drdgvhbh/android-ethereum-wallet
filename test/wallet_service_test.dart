@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:ethwallet/wallet_service.dart';
 import 'package:flutter/services.dart';
 import 'package:test/test.dart';
@@ -26,7 +28,8 @@ void main() {
           equals(
             'createWallet',
           ));
-      expect(methodCall.arguments, equals(password));
+      expect(methodCall.arguments,
+          HashMap.fromEntries([MapEntry("password", password)]));
       return Future.value('Stub');
     });
     repo.createWallet(password).listen(expectAsync1((_) {
