@@ -9,6 +9,7 @@ import dagger.android.support.AndroidSupportInjectionModule
 import drdgvhbh.com.github.ethwallet.MainActivity
 import drdgvhbh.com.github.ethwallet.di.module.ActivityModule
 import drdgvhbh.com.github.ethwallet.di.module.ApplicationModule
+import drdgvhbh.com.github.ethwallet.di.module.BridgeModule
 import drdgvhbh.com.github.ethwallet.di.module.PersistenceModule
 import javax.inject.Singleton
 
@@ -17,7 +18,8 @@ import javax.inject.Singleton
     AndroidSupportInjectionModule::class,
     ApplicationModule::class,
     PersistenceModule::class,
-    ActivityModule::class
+    ActivityModule::class,
+    BridgeModule::class
 ])
 interface AppComponent : AndroidInjector<DaggerApplication> {
     fun inject(mainActivity: MainActivity)
