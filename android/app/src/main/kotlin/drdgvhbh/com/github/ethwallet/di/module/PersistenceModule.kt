@@ -8,6 +8,8 @@ import drdgvhbh.com.github.ethwallet.persistence.*
 import drdgvhbh.com.github.ethwallet.service.WalletFactory
 import drdgvhbh.com.github.ethwallet.service.WalletRepository
 import drdgvhbh.com.github.ethwallet.service.WalletService
+import kotlinx.coroutines.CoroutineDispatcher
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -20,8 +22,9 @@ class PersistenceModule {
     @Singleton
     fun provideWalletRepository(
             @ApplicationContext context: Context,
-            walletGenerator: WalletGenerator
-    ): WalletRepository = Bip44WalletRepository(context, walletGenerator)
+            walletGenerator: WalletGenerator,
+            @Named("IO") dispatcher: CoroutineDispatcher
+    ): WalletRepository = Bip44WalletRepository(context, walletGenerator, dispatcher)
 
     @Provides
     @Singleton

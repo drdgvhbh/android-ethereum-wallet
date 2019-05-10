@@ -7,6 +7,9 @@ import com.nhaarman.mockitokotlin2.atLeastOnce
 import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
 import org.web3j.crypto.Bip39Wallet
 import java.io.File
@@ -14,8 +17,9 @@ import java.io.File
 private const val password = "securePassword123"
 
 class Bip44WalletRepositoryTest {
+    @ExperimentalCoroutinesApi
     @Test
-    fun `create should generate a wallet in the context files directory`() {
+    fun `create should generate a wallet in the context files directory`() = runBlockingTest {
         val directoryStub = "drdgvhbh.com.github.ethwallet.files"
         val fileStub = File(directoryStub)
         val mockContext = mock<Context> {
@@ -26,7 +30,7 @@ class Bip44WalletRepositoryTest {
             given(mock.generateWallet(password, fileStub)).willReturn(wallet)
         }
 
-        val repository = Bip44WalletRepository(mockContext, mockGenerator)
+        val repository = Bip44WalletRepository(mockContext, mockGenerator, TestCoroutineDispatcher())
         val createdWallet = repository.create(password)
 
         verify(mockContext, atLeastOnce()).filesDir

@@ -3,14 +3,17 @@ package drdgvhbh.com.github.ethwallet.service
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import com.nhaarman.mockitokotlin2.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
 import org.web3j.crypto.Bip39Wallet
 
 private const val password = "securePassword123"
 
+@ExperimentalCoroutinesApi
 class WalletServiceTest {
     @Test
-    fun `should create a wallet with a mnemonic`() {
+    fun `should create a wallet with a mnemonic`() = runBlockingTest {
         val mnemonic = "neglect stay end angry track act garage donate tell annual wage pledge acid vibrant turn"
         val mockWallet = mock<Bip39Wallet> {
             given(mock.mnemonic).willReturn(mnemonic)

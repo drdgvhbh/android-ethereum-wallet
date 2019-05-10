@@ -4,6 +4,9 @@ import com.nhaarman.mockitokotlin2.*
 import drdgvhbh.com.github.ethwallet.service.WalletFactory
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
 
@@ -11,6 +14,7 @@ private const val password = "securePassword123"
 private const val mnemonic = "neglect stay end angry track act garage donate tell annual wage pledge acid vibrant turn"
 
 
+@ExperimentalCoroutinesApi
 class CreateWalletHandlerTest {
     private lateinit var mockWalletFactory: WalletFactory
 
@@ -25,7 +29,7 @@ class CreateWalletHandlerTest {
     @Test
     fun `should respond with an error when password is not defined`() {
         val methodCall = MethodCall("createWallet", null)
-        val createWalletHandler = CreateWalletHandler(mockWalletFactory)
+        val createWalletHandler = CreateWalletHandler(mockWalletFactory, TestCoroutineDispatcher())
 
         createWalletHandler.onMethodCall(methodCall, methodChannelResult)
 
@@ -34,10 +38,10 @@ class CreateWalletHandlerTest {
     }
 
     @Test
-    fun `should respond with the wallet mnemonic upon success`() {
+    fun `should respond with the wallet mnemonic upon success`() = runBlockingTest {
         val args = hashMapOf("password" to password)
         val methodCall = MethodCall("createWallet", args)
-        val createWalletHandler = CreateWalletHandler(mockWalletFactory)
+        val createWalletHandler = CreateWalletHandler(mockWalletFactory, TestCoroutineDispatcher())
         given(mockWalletFactory.createWallet(password)).willReturn(mnemonic)
 
         createWalletHandler.onMethodCall(methodCall, methodChannelResult)
