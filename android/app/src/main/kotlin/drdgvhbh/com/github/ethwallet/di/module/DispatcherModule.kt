@@ -13,4 +13,14 @@ class DispatcherModule {
     @Singleton
     @Named("IO")
     fun provideIODispatcher(): CoroutineDispatcher = Dispatchers.IO
+
+    @Provides
+    @Singleton
+    @Named("Main")
+    fun provideMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
+
+    @Provides
+    @Singleton
+    @Named("Default")
+    fun provideDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
 }
